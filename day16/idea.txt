@@ -1,0 +1,5 @@
+track current direction, each tile tracks the directions that have gone thru it.
+if tile has current direction, stop projecting
+otherwise, tile returns a list of follow-up projections
+for each follow-up, check if it has been done before. if not, add to a list
+after current projection ends, iterate through list and resume

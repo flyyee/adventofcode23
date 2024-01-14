@@ -1,0 +1,18 @@
+From spawn, travel to the corner of the square, and then travel via the free edges until the desired square.
+Upon reaching the desired square's corner, use the pre-computed distances from corner to tiles to determine which are in reach.
+
+There is a concern that this may not be the shortest path, for instance if there is a shorter path that does not involve travelling to the corner.
+For example, https://imgur.com/a/VKWkUWJ
+In general, this is a valid concern. However, for this arrangement, it can be proven (can it??) that this is not a concern.
+First, notice that this is only an issue for shorter paths. If the path is long enough and requires passing through more squares,
+we realise that we will take on the 'cost' of a path passing through the square. Such a cost is 0 if we travel along the edge, or if
+there is a straight path through the square that doesn't meet a rock. If such a straight path doesn't exist, a cost of at least 1 is incurred,
+which when multiplied on the scale of the length of the path, far outweighs the one-time cost inccurred by travelling to the corner.
+
+Rough proof: N * straight_cost < 2 * corner_cost
+N: maximum number of squares we can reach (horizontally/vertically)
+straight_cost: minimum cost to travel straight through a square
+corner_cost: cost to travel from the centre of a square to its corner
+Notice that for straight_cost >= 1, when N is very large (as it is in this case), LHS >> RHS
+Notice also that for small cases of N, i.e. not travelling the maximum number of squares reachable, this concern is
+a non-issue since we aren't even fully using our steps, so it is (likely) possible to reach any tile in the square regardless.
